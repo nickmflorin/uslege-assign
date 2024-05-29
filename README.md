@@ -390,20 +390,20 @@ Install dependencies
 $ pnpm install
 ```
 
-### 2.3: Migrations
-
-Run the database migrations:
-
-```bash
-$ pnpm migrate-dev
-```
-
-### 2.4: Database
+### 2.3: Database
 
 Make sure the database server is running:
 
 ```bash
 $ brew services start postgresql
+```
+
+### 2.4: Migrations
+
+Run the database migrations:
+
+```bash
+$ pnpm migrate-dev
 ```
 
 ### 2.5 Execution
