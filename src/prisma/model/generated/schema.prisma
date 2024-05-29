@@ -1,0 +1,45 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+  output          = "./model/generated"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // Uses Connection Pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // Uses a Direct Connection
+}
+
+model Witness {
+  id           String    @id @default(uuid()) @db.Uuid
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  title        String?
+  organization String
+  city         String
+  state        String
+  name         String
+  committee    Committee @relation("witnesses", fields: [committeeId], references: [id])
+  committeeId  String    @db.Uuid
+}
+
+model Committee {
+  id        String       @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  list      WitnessList? @relation("committees", fields: [listId], references: [id])
+  listId    String?      @db.Uuid
+  witnesses Witness[]    @relation("witnesses")
+}
+
+model WitnessList {
+  id         String      @id @default(uuid()) @db.Uuid
+  timestamp  DateTime
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  department String
+  committees Committee[] @relation("committees")
+
+  @@unique([timestamp, department])
+}
