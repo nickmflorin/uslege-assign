@@ -49,6 +49,10 @@ const parseWitnessListDocument = async (
   throw new Error("OpenAPI response unexpectedly returned a message without any content!");
 };
 
+/* I started off making some of these things classes thinking that it would provide more structure,
+   but they probably aren't necessary - at least in this scope.  I guess in the real world, it would
+   depend on a lot of additional context in how we were designing this (so that it may or may not
+   apply to things other than just this one example) and how it fit into the larger system. */
 export class TexasWitnessListExtractor extends PdfClient {
   constructor() {
     super("https://capitol.texas.gov/tlodocs/88R/witlistmtg/pdf");
