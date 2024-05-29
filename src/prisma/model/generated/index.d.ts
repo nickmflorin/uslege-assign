@@ -4108,6 +4108,7 @@ export namespace Prisma {
 
   export type WitnessWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    committeeId_name?: WitnessCommitteeIdNameCompoundUniqueInput
     AND?: WitnessWhereInput | WitnessWhereInput[]
     OR?: WitnessWhereInput[]
     NOT?: WitnessWhereInput | WitnessWhereInput[]
@@ -4120,7 +4121,7 @@ export namespace Prisma {
     name?: StringFilter<"Witness"> | string
     committeeId?: UuidFilter<"Witness"> | string
     committee?: XOR<CommitteeRelationFilter, CommitteeWhereInput>
-  }, "id">
+  }, "id" | "committeeId_name">
 
   export type WitnessOrderByWithAggregationInput = {
     id?: SortOrder
@@ -4177,6 +4178,7 @@ export namespace Prisma {
 
   export type CommitteeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    listId_name?: CommitteeListIdNameCompoundUniqueInput
     AND?: CommitteeWhereInput | CommitteeWhereInput[]
     OR?: CommitteeWhereInput[]
     NOT?: CommitteeWhereInput | CommitteeWhereInput[]
@@ -4186,7 +4188,7 @@ export namespace Prisma {
     listId?: UuidNullableFilter<"Committee"> | string | null
     list?: XOR<WitnessListNullableRelationFilter, WitnessListWhereInput> | null
     witnesses?: WitnessListRelationFilter
-  }, "id">
+  }, "id" | "listId_name">
 
   export type CommitteeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -4531,6 +4533,11 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
+  export type WitnessCommitteeIdNameCompoundUniqueInput = {
+    committeeId: string
+    name: string
+  }
+
   export type WitnessCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -4657,6 +4664,11 @@ export namespace Prisma {
 
   export type WitnessOrderByRelationAggregateInput = {
     _count?: SortOrder
+  }
+
+  export type CommitteeListIdNameCompoundUniqueInput = {
+    listId: string
+    name: string
   }
 
   export type CommitteeCountOrderByAggregateInput = {

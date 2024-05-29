@@ -21,6 +21,8 @@ model Witness {
   name         String
   committee    Committee @relation("witnesses", fields: [committeeId], references: [id])
   committeeId  String    @db.Uuid
+
+  @@unique([committeeId, name])
 }
 
 model Committee {
@@ -31,6 +33,8 @@ model Committee {
   list      WitnessList? @relation("committees", fields: [listId], references: [id])
   listId    String?      @db.Uuid
   witnesses Witness[]    @relation("witnesses")
+
+  @@unique([listId, name])
 }
 
 model WitnessList {
