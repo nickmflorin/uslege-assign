@@ -226,8 +226,14 @@ application.
 #### 1.3.a ENV File
 
 Simply copy the `.env.example` file to a new file, called `.env`. This file will be ignored by
-source control. Then, modify the `.env` file to include the proper OpenAI secret key for your
-project, by pasting the key next to the `OPEN_AI_API_KEY` variable.
+source control.
+
+```bash
+$ cp ./.env.example ./.env
+```
+
+Then, modify the `.env` file to include the proper OpenAI secret key for your project, by pasting
+the key next to the `OPEN_AI_API_KEY` variable.
 
 #### 1.3.b: Dependencies
 
