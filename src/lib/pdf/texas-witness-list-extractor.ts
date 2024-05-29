@@ -14,6 +14,9 @@ const openai = new OpenAI({
   apiKey: environment.get("OPEN_AI_API_KEY"),
 });
 
+/* There are probably better ways to do this with OpenAI.  I was reading about "parameters" for a
+   little while but didn't get far enough.  This is working but there are undoubtedly probably
+   faster, better ways. */
 const createExtraction = (text: string) =>
   "Extract a witness list, returning as a JSON object, that consists of a timestamp field, " +
   "the department name (as field 'department'), and a list of committees, where each committee " +
