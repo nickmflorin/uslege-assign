@@ -1,6 +1,6 @@
 import { prisma } from "~/prisma/client";
 import { LogLevel } from "~/environment";
-import { texasWitnessListExtractor } from "~/lib/pdf";
+import { texasWitnessListExtractor } from "~/lib/pdf/texas-witness-list-extractor";
 import { logger } from "~/application/logger";
 
 logger.level = LogLevel.INFO;

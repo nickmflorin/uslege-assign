@@ -1,4 +1,8 @@
-// I have mild PDF.js PTSD, but here we go again.
+/* I have mild PDF.js PTSD, but here we go again.
+
+   Note: This import is breaking tests, and I cannot figure out how to fix it, but it's obviously
+   the .mjs extension.  For now, tests will just have to make sure this file does not get picked
+   up when importing the files that are being tested. */
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
 import { type TextItem } from "pdfjs-dist/types/src/display/api";
 

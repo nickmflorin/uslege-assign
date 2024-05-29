@@ -1,4 +1,4 @@
-type WithoutTrailingSlash<S extends string> = S extends `${infer R}/` ? R : S;
+type WithoutTrailingSlash<S extends string> = S extends `${infer R}/` ? WithoutTrailingSlash<R> : S;
 
 export type BasePdfUrl<P extends string = string> = `http${"s" | ""}://${P}`;
 
@@ -13,12 +13,17 @@ export const constructPdfUrl = <U extends BasePdfUrl<P>, P extends string, I ext
   if (!PdfIdRegex.test(id)) {
     throw new Error(`The provided ID ${id} is invalid!`);
   }
-  let base: WithoutTrailingSlash<U>;
-  if (baseUrl.endsWith("/")) {
-    base = baseUrl.slice(0, -1) as WithoutTrailingSlash<U>;
-  } else {
-    base = baseUrl as WithoutTrailingSlash<U>;
+  /* While an edge case, to satisfy the WithoutTraililngSlash type properly we would need to
+     account for the case where the baseUrl incorrectly contains multiple trailing slashes.  We
+     could either throw an Error in that case, or just remove all of them.  The decision depends on
+     the broader context in how this function is used - but for now I'm assuming that we want it to
+     be a little bit more forgiving, and not throw an error. */
+  let sanitized: string = baseUrl;
+  while (sanitized.endsWith("/")) {
+    sanitized = sanitized.slice(0, -1);
   }
+  // This type coercion is safe because of the above logic.
+  const base = sanitized as WithoutTrailingSlash<U>;
   return `${base}/${id}.pdf`;
 };
 

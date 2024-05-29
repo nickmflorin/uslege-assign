@@ -1,4 +1,10 @@
+import { pathsToModuleNameMapper } from "ts-jest";
+
 import type { Config } from "jest";
+
+import tsConfig from "./tsconfig.json";
+
+const compilerOptions = tsConfig.compilerOptions;
 
 // Jest configuration options that are allowed to be overridden on a per-project basis.
 type AllowedConfig = Omit<
@@ -54,6 +60,9 @@ const TestModuleDisplayNames: { [key in TestModule]: string } = {
 export const withBaseConfig = (rootDir: string, config: AllowedConfig): Config => ({
   ...config,
   rootDir,
+  preset: "ts-jest",
+  testEnvironment: "node",
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: __dirname }),
 });
 
 /**
